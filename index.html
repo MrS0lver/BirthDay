@@ -3,168 +3,306 @@
 <head>
   <meta charset="UTF-8" />
   <title>Happy Birthday Crypto Sir 🐱</title>
-
-  <!-- GOOGLE FONT -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-
   <style>
     body {
       margin: 0;
       padding: 0;
-      font-family: "Poppins", sans-serif;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       background: radial-gradient(circle at top, #ffecb3, #ffccbc, #f8bbd0);
-      overflow: hidden;
       display: flex;
-      justify-content: center;
+      flex-direction: column;
       align-items: center;
+      justify-content: center;
       height: 100vh;
-      text-align: center;
+      overflow: hidden;
     }
 
-    .container {
-      max-width: 600px;
-      padding: 30px;
-      background: rgba(255,255,255,0.8);
+    .card {
+      background: rgba(255, 255, 255, 0.9);
+      padding: 26px 32px;
       border-radius: 20px;
-      box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+      box-shadow: 0 14px 32px rgba(0, 0, 0, 0.18);
+      text-align: center;
+      max-width: 520px;
       backdrop-filter: blur(6px);
-      animation: fadeIn 1.5s ease forwards;
     }
 
     h1 {
-      font-size: 2.6rem;
-      margin-bottom: 10px;
-      opacity: 0;
-      animation: fadeIn 1s ease forwards;
-      animation-delay: 0.3s;
+      font-size: 2.8rem;
+      margin: 0 0 0.4rem;
     }
 
-    .line {
+    h2 {
+      font-size: 1.4rem;
+      margin: 0 0 0.75rem;
+      opacity: 0.9;
+    }
+
+    .msg {
+      margin-top: 8px;
+      font-size: 1rem;
+      line-height: 1.5;
+    }
+
+    .meow-row {
+      margin-top: 14px;
       font-size: 1.1rem;
-      margin: 12px 0;
-      opacity: 0;
-      transform: translateY(10px);
-      animation: lineIn 1.2s ease forwards;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      animation: bounce 1.5s infinite;
     }
 
-    @keyframes lineIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: scale(0.95); }
-      to { opacity: 1; transform: scale(1); }
+    .controls {
+      margin-top: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      align-items: center;
     }
 
-    /* Floating Meows */
+    .btn-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    button {
+      border: none;
+      padding: 8px 15px;
+      border-radius: 999px;
+      cursor: pointer;
+      font-size: 0.95rem;
+      font-weight: 600;
+      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.18);
+      background: #ffb74d;
+      transition: transform 0.1s ease, box-shadow 0.1s ease, background 0.2s ease;
+    }
+
+    button:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 9px 18px rgba(0, 0, 0, 0.25);
+      background: #ffa726;
+    }
+
+    button:active {
+      transform: translateY(1px) scale(0.98);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    }
+
+    .cat-btn {
+      font-size: 1.2rem;
+      padding: 8px 18px;
+    }
+
+    .counter {
+      font-size: 0.95rem;
+      margin-top: 4px;
+      opacity: 0.9;
+    }
+
+    .input-row {
+      display: flex;
+      gap: 8px;
+      width: 100%;
+      max-width: 360px;
+      margin-top: 4px;
+    }
+
+    input[type="text"] {
+      flex: 1;
+      padding: 7px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(0, 0, 0, 0.15);
+      font-size: 0.9rem;
+      outline: none;
+    }
+
+    .custom-wish {
+      margin-top: 8px;
+      font-size: 0.95rem;
+      font-style: italic;
+      min-height: 1.2em;
+      opacity: 0.9;
+    }
+
     .floating-meow {
       position: absolute;
-      font-size: 1rem;
-      opacity: 0.8;
+      font-size: 0.9rem;
+      opacity: 0.7;
       pointer-events: none;
-      animation: floatUp 6s linear infinite;
+      animation: floatUp 6s linear forwards;
+      user-select: none;
     }
 
     @keyframes floatUp {
-      0% { transform: translateY(0); opacity: 1; }
+      0% { transform: translateY(0); opacity: 0.95; }
       100% { transform: translateY(-120vh); opacity: 0; }
     }
 
-    /* Typing Title */
-    .type {
-      display: inline-block;
-      border-right: 2px solid #333;
-      white-space: nowrap;
-      overflow: hidden;
-      font-weight: bold;
-      animation: caret 0.7s infinite;
+    .footer {
+      position: fixed;
+      bottom: 8px;
+      font-size: 0.8rem;
+      opacity: 0.7;
+      text-align: center;
     }
 
-    @keyframes caret {
-      50% { border-color: transparent; }
+    .flash {
+      animation: flashBg 0.5s ease;
+    }
+
+    @keyframes flashBg {
+      0%   { background-color: rgba(255, 255, 255, 0.8); }
+      100% { background-color: transparent; }
     }
   </style>
 </head>
 <body>
 
-  <!-- SOUND FILE (place meow.mp3 in SAME FOLDER) -->
-  <audio id="meowSound" src="meow.mp3" autoplay loop></audio>
+  <!-- 🔊 AUTO MUSIC (PLACE birthday.mp3 IN SAME FOLDER) -->
+  <audio id="bgMusic" src="birthday.mp3" autoplay loop muted></audio>
 
-  <div class="container">
-    <h1 class="type" id="titleText"></h1>
+  <div class="card" id="card">
+    <h1>🎉 Happy Birthday 🎉<br>Crypto Sir</h1>
+    <h2>Official Meow Merchant of the Friend Group 😼</h2>
 
-    <p class="line" style="animation-delay: 1.2s;">
-      Today is your super-special, extra-sparkly meow-day — the one where you meow with maximum confidence
-      and confuse the entire universe in the most adorable way possible.
+    <p class="msg">
+      Wishing you a birthday full of laughter, chaos and suspiciously loud meows.
+      Thanks for being that one friend who keeps life fun, weird and beautifully confusing.
     </p>
 
-    <p class="line" style="animation-delay: 2.3s;">
-      Thank you for tolerating our absolutely questionable Counter-Strike gameplay and still choosing
-      to queue with us instead of uninstalling the game.
+    <p class="meow-row" id="meowRow">
+      meow meow meow MEEOW meow meow
     </p>
 
-    <p class="line" style="animation-delay: 3.6s;">
-      Stay weird, stay legendary, keep meowing like the certified cat-human hybrid you are,
-      and may this year bring you happiness, success, and endless fish snacks.
-    </p>
+    <div class="controls">
+      <div class="btn-row">
+        <button class="cat-btn" id="meowButton">🐱 Send Meow</button>
+        <button id="attackButton">💥 Meow Attack</button>
+      </div>
 
-    <p class="line" style="animation-delay: 4.9s;">
-      Meow meow meow MEEEOOOW meOw meow meow m͟e͟o͟w͟ mEOWWWWWWWWW meow × 9999999999999! 🐾😼🎉
-    </p>
+      <div class="counter" id="meowCounter">
+        Total meows sent to Crypto Sir: <strong>0</strong>
+      </div>
 
-    <p class="line" style="animation-delay: 6.2s;">
-      Thank you for surviving our questionable Counter-Strike gameplay and still choosing to queue
-      with us like the adorable chaos-gremlin you are.
-    </p>
+      <div class="input-row">
+        <input type="text" id="wishInput" placeholder="Type your custom birthday line..." />
+        <button id="addWishButton">Add</button>
+      </div>
 
-    <p class="line" style="animation-delay: 7.4s;">
-      Keep being cute, keep being legendary, and keep meowing your way through the universe with maximum charm.
-    </p>
+      <div class="custom-wish" id="customWish"></div>
+    </div>
+  </div>
 
-    <p class="line" style="animation-delay: 8.6s;">
-      May your day be full of happiness, good vibes, and an unreasonable amount of fishy snacks!
-    </p>
-
-    <p class="line" style="animation-delay: 9.8s;">
-      meow meow MEEEOOOW meow × 9999! 🐾💗
-    </p>
-
+  <div class="footer">
+    Made for Crypto Sir with ❤, confusion and excessive meows.
+    <br>(Tip: Press the <b>M</b> key 👀)
   </div>
 
   <script>
-    /* Typing Effect for the Title */
-    const title = "🎉 Happy Birthday Crypto Sir! 🎉";
-    const titleElement = document.getElementById("titleText");
-    let i = 0;
+    /* ---- ENABLE MUSIC AFTER LOAD ---- */
+    window.addEventListener("load", () => {
+      const music = document.getElementById("bgMusic");
 
-    function type() {
-      if (i < title.length) {
-        titleElement.textContent += title.charAt(i);
-        i++;
-        setTimeout(type, 80);
-      } else {
-        document.getElementById("meowSound").muted = false; // enable sound after typing ends
-      }
-    }
-    type();
+      // small delay helps bypass browser autoplay blocks
+      setTimeout(() => {
+        music.muted = false;
+        music.play().catch(() => {
+          console.log("Autoplay blocked, but will start after first click.");
+        });
+      }, 800);
+    });
 
-    /* Floating Meows */
-    function spawnMeow() {
+    const meowRow = document.getElementById("meowRow");
+    const meowCounter = document.getElementById("meowCounter").querySelector("strong");
+    const meowButton = document.getElementById("meowButton");
+    const attackButton = document.getElementById("attackButton");
+    const wishInput = document.getElementById("wishInput");
+    const addWishButton = document.getElementById("addWishButton");
+    const customWish = document.getElementById("customWish");
+    const card = document.getElementById("card");
+
+    let meowCount = 0;
+
+    const meowLines = [
+      "meow meow meow MEEOW meow meow",
+      "MEOW meow mEeOw meowww",
+      "meow x 999999999 (approx)",
+      "mEoW mEoW mEoW 😼",
+      "meow.exe has stopped working",
+      "meow??? meow. MEOW!"
+    ];
+
+    setInterval(() => {
+      const index = Math.floor(Math.random() * meowLines.length);
+      meowRow.textContent = meowLines[index];
+    }, 1600);
+
+    function spawnMeow(customText) {
       const meow = document.createElement("div");
       meow.className = "floating-meow";
-      meow.textContent = "meow";
+      meow.textContent = customText || "meow";
 
       meow.style.left = Math.random() * 100 + "vw";
       meow.style.bottom = "-20px";
-      meow.style.animationDelay = Math.random() * 3 + "s";
+      meow.style.fontSize = (0.8 + Math.random() * 0.6) + "rem";
+      meow.style.animationDelay = Math.random() * 1 + "s";
 
       document.body.appendChild(meow);
 
-      setTimeout(() => meow.remove(), 7000);
+      setTimeout(() => meow.remove(), 6500);
     }
-    setInterval(spawnMeow, 700);
-  </script>
 
+    setInterval(() => spawnMeow(), 900);
+
+    meowButton.addEventListener("click", () => {
+      meowCount++;
+      meowCounter.textContent = meowCount;
+      spawnMeow("MEOW!");
+      spawnMeow("meow");
+      spawnMeow("mEoW");
+
+      meowButton.textContent = "🐱 Meow Sent!";
+      setTimeout(() => meowButton.textContent = "🐱 Send Meow", 400);
+    });
+
+    attackButton.addEventListener("click", () => {
+      card.classList.add("flash");
+      for (let i = 0; i < 18; i++) {
+        setTimeout(() => {
+          const texts = ["meow", "MEOOOW", "mEoW", "meow?!", "😼"];
+          spawnMeow(texts[Math.floor(Math.random() * texts.length)]);
+        }, i * 80);
+      }
+      setTimeout(() => card.classList.remove("flash"), 520);
+    });
+
+    addWishButton.addEventListener("click", () => {
+      const text = wishInput.value.trim();
+      if (!text) return;
+      customWish.textContent = "Custom wish: " + text;
+      wishInput.value = "";
+    });
+
+    wishInput.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") addWishButton.click();
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key.toLowerCase() === "m") {
+        for (let i = 0; i < 6; i++) {
+          setTimeout(() => spawnMeow("meow"), i * 80);
+        }
+        meowCount += 3;
+        meowCounter.textContent = meowCount;
+      }
+    });
+  </script>
 </body>
 </html>
