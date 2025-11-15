@@ -210,14 +210,22 @@
     window.addEventListener("load", () => {
       const music = document.getElementById("bgMusic");
 
-      // small delay helps bypass browser autoplay blocks
       setTimeout(() => {
         music.muted = false;
         music.play().catch(() => {
-          console.log("Autoplay blocked, but will start after first click.");
+          console.log("Autoplay blocked until user taps.");
         });
       }, 800);
     });
+
+    /* ---- PHONE TAP TO FORCE MUSIC START ---- */
+    document.addEventListener("touchstart", () => {
+      const music = document.getElementById("bgMusic");
+      music.muted = false;
+      music.play().catch(() => {});
+    }, { once: true });
+
+    /* ---- REST OF YOUR SCRIPT (UNCHANGED) ---- */
 
     const meowRow = document.getElementById("meowRow");
     const meowCounter = document.getElementById("meowCounter").querySelector("strong");
