@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <title>Happy Birthday Crypto Sir 🐱</title>
+
   <style>
     body {
       margin: 0;
@@ -165,8 +166,8 @@
 </head>
 <body>
 
-  <!-- 🔊 AUTO MUSIC (PLACE birthday.mp3 IN SAME FOLDER) -->
-  <audio id="bgMusic" src="birthday.mp3" autoplay loop muted></audio>
+  <!-- 🎵 BACKGROUND MUSIC -->
+  <audio id="bgMusic" src="birthday.mp3" autoplay loop muted playsinline></audio>
 
   <div class="card" id="card">
     <h1>🎉 Happy Birthday 🎉<br>Crypto Sir</h1>
@@ -206,30 +207,42 @@
   </div>
 
   <script>
-    /* ---- ENABLE MUSIC AFTER LOAD ---- */
+    /* --------------------------------------------------
+       PC AUTO-PLAY (works on desktop)
+    -------------------------------------------------- */
     window.addEventListener("load", () => {
       const music = document.getElementById("bgMusic");
 
       setTimeout(() => {
         music.muted = false;
         music.play().catch(() => {
-          console.log("Autoplay blocked until user taps.");
+          console.log("PC autoplay blocked — mobile requires user action.");
         });
-      }, 800);
+      }, 700);
     });
 
-    /* ---- PHONE TAP TO FORCE MUSIC START ---- */
-    document.addEventListener("touchstart", () => {
-      const music = document.getElementById("bgMusic");
-      music.muted = false;
-      music.play().catch(() => {});
-    }, { once: true });
+    /* --------------------------------------------------
+       PHONE MUSIC STARTS ONLY WHEN USER PRESSES "SEND MEOW"
+    -------------------------------------------------- */
+    const meowButton = document.getElementById("meowButton");
+    const music = document.getElementById("bgMusic");
 
-    /* ---- REST OF YOUR SCRIPT (UNCHANGED) ---- */
+    let musicStarted = false;
+
+    meowButton.addEventListener("click", () => {
+      if (!musicStarted) {
+        music.muted = false;
+        music.play().catch(() => {});
+        musicStarted = true;
+      }
+    });
+
+    /* --------------------------------------------------
+       ORIGINAL SCRIPT (unchanged)
+    -------------------------------------------------- */
 
     const meowRow = document.getElementById("meowRow");
     const meowCounter = document.getElementById("meowCounter").querySelector("strong");
-    const meowButton = document.getElementById("meowButton");
     const attackButton = document.getElementById("attackButton");
     const wishInput = document.getElementById("wishInput");
     const addWishButton = document.getElementById("addWishButton");
@@ -272,6 +285,7 @@
     meowButton.addEventListener("click", () => {
       meowCount++;
       meowCounter.textContent = meowCount;
+
       spawnMeow("MEOW!");
       spawnMeow("meow");
       spawnMeow("mEoW");
